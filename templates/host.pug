@@ -1,0 +1,53 @@
+doctype html
+head
+  title IB Review (Host)
+  script(src='https://cdn.socket.io/4.0.1/socket.io.min.js')
+  style.
+    .container{
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .border{
+      padding: 2px 10px;
+      border: 1px solid;
+    }
+    .scorea{background-color: rgba(255, 30, 30, 1);}
+
+.container
+  h1 Host
+    button(onclick='toggleError()') Show Error
+    button(onclick='hideExplanation()') Hide Explanation
+  | {% for t in teams %}
+  div
+    | Team {{t[0]}}} &nbsp;
+    div(id="score{{t[0]}}") x{{t[1]}}
+  | {%endfor%}
+  button
+    a(href="{{url_for('reset_score')}}") reset score
+  |{{ question}}
+  | {% for opt in options %}
+  div.border
+    h3 {{loop.index}}
+      button(onclick='revealOption({{loop.index0}})')  {{opt[0]}}
+      | {% for t in teams %}
+      button.scorea(onclick="addTeam('{{t[0]}}',{{opt[1]}})") Team {{t[0]}}
+      | {%endfor%}
+  | {%endfor%}
+
+script.
+  const socket = io();
+  function revealOption(buttonId) {
+    socket.emit('reveal', {button_id: buttonId});
+  }
+
+  function toggleError() {
+    socket.emit('toggleError');
+  }
+
+  function hideExplanation() {
+    socket.emit('hideExplanation');
+  }
+
+  function addTeam(team, points){
+    socket.emit('addScore', {team: team, points:points});
+  }

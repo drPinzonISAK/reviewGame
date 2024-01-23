@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+  <title>Warm Up</title>
+  <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet">
+  <style>
+    .container, .nav-brand{
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .nav-brand{
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    button{
+      margin-bottom: 10px;
+    }
+    .show{
+      display: flex;
+    }
+    .hidden{
+      display: none;
+    }
+    .flex {
+      display: flex;
+    }
+    .flex-2{
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .width-100{
+      min-width: 580px;
+    }
+    .nes-container{
+      border: none;
+    }
+    .large {
+      font-size: 50px;
+      color: red;
+      font-weight: bolder;
+    }
+  </style>
+</head>
+<header>
+  <div class="nav-brand">
+    <h1><i class="nes-icon is-large star"></i>Warm up</h1>
+  </div>
+</header>
+<div class="container">
+  <div class="flex flex-2">
+    <div class="flex">Team A &nbsp;<i class="nes-icon coin"></i>
+      <div id="scoreA">x{{score[0]}}</div>
+    </div>
+    <div class="flex">Team B &nbsp;<i class="nes-icon coin"></i>
+      <div id="scoreB">x{{score[1]}}</div>
+    </div>
+  </div>
+  <p>{% for opt in options %}
+    <div class="flex">
+      <button class="nes-btn is-warning"> {{loop.index}}</button>
+      <div class="{{'show' if opt[2] else 'hidden'}}" id="button_{{loop.index0}}">
+        <div class="width-100 nes-container is-rounded">
+          <p>{{opt[0]}}</p>
+        </div>
+        <button class="nes-btn">{{opt[1]}}</button>
+      </div>
+    </div>{%endfor%}
+    <section class="nes-container hidden" id="error_btn">
+      <section class="message-list">
+        <section class="message -left">
+          <div class="nes-balloon from-left">
+            <h1 class="large">X</h1>
+          </div>
+        </section>
+      </section>
+    </section>
+    <section class="nes-container hidden" id="explanation">
+      <section class="message-list">
+        <section class="message -left">
+          <div class="nes-balloon from-left">
+            <p id="mesagge"></p>
+          </div><i class="nes-bcrikko"></i>
+          <!-- Balloon-->
+        </section>
+      </section>
+    </section>
+  </p>
+</div>
+<script>
+  const socket = io();
+  socket.on('option_updated_warmup', function(data) {
+    var button = document.getElementById(`button_${data.button_id}`);
+    button.classList.remove("hidden");
+    button.classList.add("show");
+    var balloon = document.getElementById('explanation');
+    balloon.classList.remove("hidden");
+    balloon.classList.add("show");
+    document.getElementById('mesagge').textContent = data.explanation;
+  });
+  socket.on('flipError', function (){
+    var error = document.getElementById('error_btn');
+  
+    // Function to remove hidden class and add show class
+    function showElement() {
+      error.classList.remove("hidden");
+      error.classList.add("show");
+    }
+  
+    // Show the element and then restore after 5 seconds
+    showElement();
+    setTimeout(() => {
+      error.classList.remove("show");
+      error.classList.add("hidden");
+    }, 5000);
+  });
+  
+  socket.on('updateScore_warmup', function (data) {
+    document.getElementById("scoreA").textContent = "x" + data.score[0];
+    document.getElementById("scoreB").textContent = "x" + data.score[1];
+  });
+  
+  socket.on('hideExplanation', function () {
+    var msg = document.getElementById('explanation');
+    msg.classList.remove("show");
+    msg.classList.add("hidden");
+  });
+</script>

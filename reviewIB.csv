@@ -1,0 +1,57 @@
+"Name type of software applications designed to perform a specific task","Operating System","Web Browser","Antivirus Software","Application Software","Design Software"
+""
+A technology company is planning to implement a new customer relationship management (CRM) system. Name a crucial consideration during the planning phase.,Evaluating alternative installation processes.,Describing the importance of user documentation.,Outlining compatibility issues resulting from situations like business mergers.,Describing the consequences of data loss in a specified situation.,Describing strategies for managing releases and updates.
+"Salesforce","A cloud-based SaaS (Software as a Service) platform offering customer relationship management (CRM), sales automation, marketing automation, and customer support services. Users can access Salesforce applications over the internet without the need for local installation, maintenance, or management.",https://www.salesforce.com/?ir=1
+"Developers are looking for a platform that abstracts infrastructure management, allowing them to focus on coding and deploying applications rather than managing servers/hardware/updates and physical space. What are some considerations they should have before contracting AWS, Azure, or Heroku?","Scalability and Performance","Service Integrations and Ecosystem","Cost Structure and Pricing Models","Ease of Deployment and Developer Experience","Security and Compliance Measures"
+"AWS Elastic Beanstalk","A cloud-based PaaS (Platform as a Service) offered by Amazon Web Services (AWS) that makes it easy for developers to deploy and run applications in various programming languages. It abstracts infrastructure management, providing a platform for quick and simple application deployment without dealing with the underlying infrastructure details.",https://aws.amazon.com/elasticbeanstalk/
+"A company is planning to develop Machine Learning models for health-related applications and is considering buying a computer. What considerations should be included in the planning?","Processing Power and GPU Specifications","Memory (RAM) Capacity","Storage Capacity and Type","Compatibility with ML Frameworks (e.g., TensorFlow, PyTorch)","Budget Constraints and Cost-effectiveness","Scalability for Future Workloads","Data Security and Privacy Compliance","Energy Efficiency and Environmental Impact","Availability of Specialized Healthcare Datasets","Integration with Existing IT Infrastructure"
+""
+"What ethical considerations should computer scientists take into account when developing and deploying new technologies?","Privacy and Data Protection","Fairness and Bias in Algorithms","Transparency in AI Decision-Making","Security and Cybersecurity","Responsible Use of Artificial Intelligence","User Consent and Informed Decision-Making","Impact on Employment and Job Displacement","Environmental Impact and Sustainability","Accessibility and Inclusivity","Open Source and Collaboration","Potential for Misuse and Ethical Hacking"
+""
+"A programming team is exploring various programming paradigms for a new project. Identify different programming paradigms:","Imperative Programming","Declarative Programming","Procedural Programming","Object-Oriented Programming (OOP)","Functional Programming","Event-Driven Programming"
+""
+"A software development team is discussing different levels of abstraction in their code. From the most abstract to the least abstract:","High-level programming language", "Algorithm", "Source code like C", "Assembly language", Machine code"
+""
+"A software development team is adopting Object-Oriented Programming (OOP) principles. Identify key concepts associated with OOP:","Classes and Objects","Inheritance","Encapsulation","Polymorphism","Abstraction","Interfaces"
+""
+"A multinational company is setting up a new office with a complex network infrastructure. What considerations should be taken into account during the network planning phase?","Scalability for Future Growth","Data Security and Encryption","Redundancy and Fault Tolerance","Bandwidth Requirements","Network Accessibility and User Permissions","Integration with Existing IT Infrastructure","Selection of Appropriate Network Topology","Quality of Service (QoS) for Multimedia Traffic","IPv6 Adoption for Address Space","Implementation of VLANs (Virtual Local Area Networks)"
+""
+"What is the general ranking of network topologies from fastest to slowest in terms of data transmission?","Star Topology","Ring Topology","Mesh Topology","Bus Topology","Tree Topology"
+""
+"A company is setting up a campus network for its large office space. What hardware considerations should be taken into account during the planning phase?","Switches and Routers for Network Segmentation","Wireless Access Points for Wi-Fi Connectivity","Fiber Optic Cabling for High-Speed Connections","Firewalls for Network Security","Core Switches for Backbone Connectivity","Redundant Power Supplies for High Availability","Load Balancers for Efficient Traffic Distribution","Network Attached Storage (NAS) for Data Storage","Quality Network Interface Cards (NICs) for End Devices","Uninterruptible Power Supply (UPS) for Power Backup"
+""
+"A company is planning its network infrastructure, and various protocols are essential for communication. Give protocols in order of abstraction, from the least abstract to the most abstract:","Physical Layer (Layer 1): Ethernet","Data Link Layer (Layer 2): IEEE 802.11 (Wi-Fi)","Network Layer (Layer 3): Internet Protocol (IP)","Transport Layer (Layer 4): Transmission Control Protocol (TCP)","Session Layer (Layer 5): NetBIOS (Network Basic Input/Output System)","Presentation Layer (Layer 6): MIME (Multipurpose Internet Mail Extensions)","Application Layer (Layer 7): Hypertext Transfer Protocol (HTTP)"
+""
+"A financial institution is strengthening its network security. Identify different methods of securing the network:","Firewalls","Intrusion Detection Systems (IDS)","Virtual Private Network (VPN)","Encryption","Multi-factor Authentication (MFA)","Security Policies"
+""
+"Identify the following computer parts:","Central Processing Unit","Random Access Memory","Graphics Processing Unit","Motherboard","Hard Disk Drive","Solid State Drive","Power Supply Unit","Graphics processing Unit","Network Interface Card","Cooling System"
+""
+"A group of engineers is discussing the different types of memories they can use in a computer system from fastest to slowest","Register", "Cache Memory", "RAM (Random Access Memory)", "ROM (Read-Only Memory)", "Hard Disk Drive (HDD)", "Solid State Drive (SSD)", "Virtual Memory", "Flash Memory", "Blu-ray Disc Storage", "NAS (Network Attached Storage)"
+""
+"What are the fundamental binary gates used in digital circuits?","AND gate", "OR gate", "NOT gate", "NAND gate", "NOR gate", "XOR gate", "XNOR gate"
+""
+"What are the stages of the machine cycle in a computer's central processing unit (CPU)?","Fetch","Decode","Execute"
+""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

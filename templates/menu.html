@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+  <title>Orientation Games with Dr Ruben</title>
+  <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet">
+  <style>
+    .container, .nav-brand{
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .nav-brand{
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    button{
+      margin-bottom: 10px;
+    }
+    .show{
+      display: flex;
+    }
+    .hidden{
+      display: none;
+    }
+    .flex {
+      display: flex;
+    }
+    .flex-2{
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .width-100{
+      min-width: 580px;
+    }
+    .nes-container{
+      border: none;
+    }
+    .large {
+      font-size: 50px;
+      color: red;
+      font-weight: bolder;
+    }
+  </style>
+</head>
+<header>
+  <div class="nav-brand">
+    <h2><i class="nes-icon is-large star"></i>Orientation Games with Dr Ruben</h2>
+  </div>
+</header>
+<div class="container">
+  <div>
+    <div><a href="{{url_for('warmup')}}">1. Warm up game</a></div>
+    <div><a href="{{url_for('host_warmup')}}" target="_blank">1. [HOST] Warm up game (New Tab)</a></div>
+    <div><a href="{{url_for('player')}}">2. Academic Integrity</a></div>
+    <div><a href="{{url_for('host')}}" target="_blank">2. [HOST] Academic Integrity (New Tab)</a></div>
+  </div>
+</div>

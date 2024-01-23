@@ -1,0 +1,124 @@
+doctype html
+head
+  title Warm Up
+  script(src='https://cdn.socket.io/4.0.1/socket.io.min.js')
+  link(href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet")
+  link(href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet")
+  style.
+    .container, .nav-brand{
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .nav-brand{
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    button{
+      margin-bottom: 10px;
+    }
+    .show{
+      display: flex;
+    }
+    .hidden{
+      display: none;
+    }
+    .flex {
+      display: flex;
+    }
+    .flex-2{
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .width-100{
+      min-width: 580px;
+    }
+    .nes-container{
+      border: none;
+    }
+    .large {
+      font-size: 50px;
+      color: red;
+      font-weight: bolder;
+    }
+header
+  .nav-brand
+    h1
+      i.nes-icon.is-large.star
+      | Warm up
+
+.container
+  div.flex.flex-2
+    div.flex
+      | Team A &nbsp;
+      i.nes-icon.coin
+      #scoreA x{{score[0]}}
+    div.flex
+      | Team B &nbsp;
+      i.nes-icon.coin
+      #scoreB x{{score[1]}}
+
+  p
+    | {% for opt in options %}
+    div.flex
+      button.nes-btn.is-warning  {{loop.index}}
+      div(id="button_{{loop.index0}}" class="{{'show' if opt[2] else 'hidden'}}")
+        div.width-100.nes-container.is-rounded
+          p {{opt[0]}}
+        button.nes-btn {{opt[1]}}
+
+    | {%endfor%}
+
+
+    section.nes-container#error_btn.hidden
+      section.message-list
+        section.message.-left
+          .nes-balloon.from-left
+            h1.large X
+
+    section.nes-container#explanation.hidden
+      section.message-list
+        section.message.-left
+          .nes-balloon.from-left
+            p#mesagge
+          i.nes-bcrikko
+          // Balloon
+
+
+script.
+  const socket = io();
+  socket.on('option_updated_warmup', function(data) {
+    var button = document.getElementById(`button_${data.button_id}`);
+    button.classList.remove("hidden");
+    button.classList.add("show");
+    var balloon = document.getElementById('explanation');
+    balloon.classList.remove("hidden");
+    balloon.classList.add("show");
+    document.getElementById('mesagge').textContent = data.explanation;
+  });
+  socket.on('flipError', function (){
+    var error = document.getElementById('error_btn');
+
+    // Function to remove hidden class and add show class
+    function showElement() {
+      error.classList.remove("hidden");
+      error.classList.add("show");
+    }
+
+    // Show the element and then restore after 5 seconds
+    showElement();
+    setTimeout(() => {
+      error.classList.remove("show");
+      error.classList.add("hidden");
+    }, 5000);
+  });
+
+  socket.on('updateScore_warmup', function (data) {
+    document.getElementById("scoreA").textContent = "x" + data.score[0];
+    document.getElementById("scoreB").textContent = "x" + data.score[1];
+  });
+
+  socket.on('hideExplanation', function () {
+    var msg = document.getElementById('explanation');
+    msg.classList.remove("show");
+    msg.classList.add("hidden");
+  });
