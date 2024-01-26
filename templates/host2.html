@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IB Review (Host)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <style>
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+        .border {
+            padding: 2px 10px;
+            border: 1px solid;
+        }
+        /* Add any additional styles here */
+    </style>
+</head>
+<body class="container py-5">
+    <h1>Host</h1>
+    <button onclick="toggleError()" class="btn btn-primary">Show Error</button>
+    <button onclick="hideExplanation()" class="btn btn-secondary">Hide Explanation</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            {% for team in teams %}
+            <th>Team {{ team[0] }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for team in teams %}
+            <td id="score{{ team[0] }}">x{{ team[1] }}</td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+
+
+    <button class="btn btn-danger">
+        <a href="{{ url_for('reset_score') }}" class="text-white">Reset Score</a>
+    </button>
+    <p>{{ question }}</p>
+
+    {% for opt in options %}
+    <div class="border">
+        <h3>
+            {{ loop.index }}
+            <button onclick="revealOption({{ loop.index0 }})" class="btn btn-info">{{ opt[0] }}</button>
+            {% for team in teams %}
+            <button class="btn btn-warning" onclick="addTeam('{{ team[0] }}', {{ opt[1] }})">Team {{ team[0] }}</button>
+            {% endfor %}
+        </h3>
+    </div>
+    {% endfor %}
+
+    <h1>Players Queue</h1>
+    <div id="queue" class="mb-3"></div>
+    <button class="btn btn-warning" onclick="clearQueue()">Clear Queue</button>
+    <button class="btn btn-primary" onclick="updateQueue()">Refresh Queue</button>
+
+    <script>
+        const socket = io();
+        function revealOption(buttonId) {
+    socket.emit('reveal', {button_id: buttonId});
+  }
+
+  function toggleError() {
+    socket.emit('toggleError');
+  }
+
+  function hideExplanation() {
+    socket.emit('hideExplanation');
+  }
+
+  function addTeam(team, points){
+    socket.emit('addScore', {team: team, points:points});
+  }
+   socket.on('update_queue', function(data) {
+            updateQueue(data.queue);
+        });
+
+        function updateQueue(queue) {
+            var list = '<ol class="list-group list-group-numbered">';
+            for (var i = 0; i < queue.length; i++) {
+                list += '<li class="list-group-item">' + queue[i] + '</li>';
+            }
+            list += '</ol>';
+            document.getElementById('queue').innerHTML = list;
+        }
+
+        function clearQueue() {
+            socket.emit('clear_queue');
+        }
+        function removefromQueue() {
+            socket.emit('remove_from_queue');
+        }
+        window.onload = function() {
+        // Code to run when the page is fully loaded
+        updateQueue();
+        clearQueue();
+        // You can call any function you want here
+    };
+        socket.on('updateScore', function(data) {
+    var scores = data.data;
+    for (var i = 0; i < scores.length; i++) {
+        var teamName = scores[i][0];
+        var teamScore = scores[i][1];
+        var scoreElement = document.getElementById('score' + teamName);
+        if (scoreElement) {
+            scoreElement.innerHTML = 'x' + teamScore;
+        }
+    }
+});
+
+
+    </script>
+</body>
+</html>
